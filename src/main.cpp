@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <algorithm>
+#include <cmath>
 
 void addEdge(int node_1, int node_2, std::vector<std::vector<int>>& graph)
 {
@@ -79,6 +80,41 @@ void generateGraph(int nodes, int saturation, std::vector<std::vector<int>>& gra
     }
 }
 
+void exportToTikZ(int nodes, const std::vector<std::vector<int>>& graph)
+{
+    const double PI = 3.1415;
+    const double node_spacing = 1.5; 
+    double radius = (nodes * node_spacing) / (2.0 * PI);
+    
+    if (radius < 2.0) {
+        radius = 2.0; 
+    }
+
+    std::cout << "\\begin{tikzpicture}[scale=0.8, transform shape, every node/.style={circle, draw, minimum size=0.6cm, inner sep=1pt}]" << std::endl;
+    
+    for (int i = 0; i < nodes; i++)
+    {
+        double angle = i * (2.0 * PI / nodes);
+        double x = radius * std::cos(angle);
+        double y = radius * std::sin(angle);
+
+        std::cout << "  \\node (n" << i + 1 << ") at (" << x << ", " << y << ") {" << i + 1 << "};" << std::endl;
+    }
+
+    for (int i = 0; i < nodes; i++)
+    {
+        for (int neighbor : graph[i])
+        {
+            if (neighbor > i)
+            {
+                std::cout << "  \\draw (n" << i + 1 << ") -- (n" << neighbor + 1 << ");" << std::endl;
+            }
+        }
+    }
+
+    std::cout << "\\end{tikzpicture}" << std::endl;
+}
+
 void print(int nodes, std::vector<std::vector<int>>& graph)
 {
     for (int i = 0; i < nodes; i++)
@@ -149,7 +185,7 @@ int main(int argc, char* argv[])
         } else if(action == "Print" || action == "print"){
             print(nodes, graph);
         } else if(action == "Export" || action == "export"){
-
+            exportToTikZ(nodes, graph);
         } else if(action == "Euler" || action == "euler"){
 
         } else if(action == "Hamilton" || action == "hamilton"){
