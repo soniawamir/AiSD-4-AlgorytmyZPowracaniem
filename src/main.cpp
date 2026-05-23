@@ -137,7 +137,27 @@ int main(int argc, char* argv[])
             removeEdge(isolated, i, graph);
         }
     }
-     
-    print(nodes, graph);
+
+    std::string action;
+    std::cout << "action> ";
+    while(std::cin >> action){
+        if(action == "exit" || action == "Exit"){
+            break;
+        } else if(action == "Help" || action == "help"){
+            std::cout << "Help\tShow this message\nPrint\tPrint the graph as an adjacency list\nExport\tExport graph to tickzpicture"
+            << "\nEuler\tFind the Euler cycle in the graph\nHamilton\tFind the Hamilton cycle in the graph\nExit\tExits the program" << std::endl;
+        } else if(action == "Print" || action == "print"){
+            print(nodes, graph);
+        } else if(action == "Export" || action == "export"){
+
+        } else if(action == "Euler" || action == "euler"){
+
+        } else if(action == "Hamilton" || action == "hamilton"){
+
+        } else {
+            std::cout << "Command not recognized" << std::endl;
+        }
+        std::cout << "action> ";
+    }
     return 0;
 }
