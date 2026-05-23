@@ -105,10 +105,10 @@ void findHamiltonCycle(const std::vector<std::vector<int>>& graph, int nodes){
     std::vector<bool> visited(nodes, false);
 
     path[0] = 0;
-    visited[0] = 0;
+    visited[0] = true;
 
     if(hamiltonDFS(0, 1, path, visited, graph, nodes)){
-        std::cout << "Hamilton cycle:\n";
+        std::cout << "Hamiltonian cycle:\n";
         for(int i=0; i<nodes; i++){
             std::cout << path[i] + 1 << " --> ";
         }
@@ -219,7 +219,7 @@ int main(int argc, char* argv[])
             break;
         } else if(action == "Help" || action == "help"){
             std::cout << "Help\tShow this message\nPrint\tPrint the graph as an adjacency list\nExport\tExport graph to tickzpicture"
-            << "\nEuler\tFind the Euler cycle in the graph\nHamilton\tFind the Hamilton cycle in the graph\nExit\tExits the program" << std::endl;
+            << "\nEuler\tFind the Euler cycle in the graph\nHamilton\tFind the Hamiltonian cycle in the graph\nExit\tExits the program" << std::endl;
         } else if(action == "Print" || action == "print"){
             print(nodes, graph);
         } else if(action == "Export" || action == "export"){
