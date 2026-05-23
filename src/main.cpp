@@ -141,13 +141,3 @@ int main(int argc, char* argv[])
     print(nodes, graph);
     return 0;
 }
-
-/* 
-Utwórz najpierw cykl Hamiltona w grafie (losując kolejne wierzchołki), a nastepnie dopełnij graf
-krawędziami wg. współczynnika nasycenia w taki sposób, aby stopień każdego wierzchołka był parzysty
-(np. poprzez losowanie krótkich cykli złożonych z 3 wierzchołków).
-*/
-
-
-
-
