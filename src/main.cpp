@@ -100,6 +100,24 @@ bool hamiltonDFS(int current_node, int position, std::vector<int>& path, std::ve
     return false;
 }
 
+void findHamiltonCycle(const std::vector<std::vector<int>>& graph, int nodes){
+    std::vector<int> path(nodes, -1);
+    std::vector<bool> visited(nodes, false);
+
+    path[0] = 0;
+    visited[0] = 0;
+
+    if(hamiltonDFS(0, 1, path, visited, graph, nodes)){
+        std::cout << "Hamilton cycle:\n";
+        for(int i=0; i<nodes; i++){
+            std::cout << path[i] + 1 << " --> ";
+        }
+        std::cout << path[0]+1 << std::endl;
+    } else {
+        std::cout << "Hamiltonian cycle not found." << std::endl;
+    }
+}
+
 void exportToTikZ(int nodes, const std::vector<std::vector<int>>& graph)
 {
     const double PI = 3.1415;
@@ -194,32 +212,27 @@ int main(int argc, char* argv[])
         }
     }
 
-    // std::string action;
-    // std::cout << "action> ";
-    // while(std::cin >> action){
-    //     if(action == "exit" || action == "Exit"){
-    //         break;
-    //     } else if(action == "Help" || action == "help"){
-    //         std::cout << "Help\tShow this message\nPrint\tPrint the graph as an adjacency list\nExport\tExport graph to tickzpicture"
-    //         << "\nEuler\tFind the Euler cycle in the graph\nHamilton\tFind the Hamilton cycle in the graph\nExit\tExits the program" << std::endl;
-    //     } else if(action == "Print" || action == "print"){
-    //         print(nodes, graph);
-    //     } else if(action == "Export" || action == "export"){
-    //         exportToTikZ(nodes, graph);
-    //     } else if(action == "Euler" || action == "euler"){
+    std::string action;
+    std::cout << "action> ";
+    while(std::cin >> action){
+        if(action == "exit" || action == "Exit"){
+            break;
+        } else if(action == "Help" || action == "help"){
+            std::cout << "Help\tShow this message\nPrint\tPrint the graph as an adjacency list\nExport\tExport graph to tickzpicture"
+            << "\nEuler\tFind the Euler cycle in the graph\nHamilton\tFind the Hamilton cycle in the graph\nExit\tExits the program" << std::endl;
+        } else if(action == "Print" || action == "print"){
+            print(nodes, graph);
+        } else if(action == "Export" || action == "export"){
+            exportToTikZ(nodes, graph);
+        } else if(action == "Euler" || action == "euler"){
 
-    //     } else if(action == "Hamilton" || action == "hamilton"){
+        } else if(action == "Hamilton" || action == "hamilton"){
+            findHamiltonCycle(graph, nodes);
+        } else {
+            std::cout << "Command not recognized" << std::endl;
+        }
+        std::cout << "action> ";
+    }
 
-    //     } else {
-    //         std::cout << "Command not recognized" << std::endl;
-    //     }
-    //     std::cout << "action> ";
-    // }
-    std::vector<int> path(nodes, -1);
-    std::vector<bool> visited(nodes, false);
-    path[0] = 0;
-    visited[0] = true;
-    std::cout << hamiltonDFS(0, 1, path, visited, graph, nodes);
-    
     return 0;
 }
