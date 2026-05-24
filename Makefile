@@ -31,7 +31,7 @@ BUILD_DIR = target
 SRC_DIR = src
 TARGET_DIR = $(BUILD_DIR)/$(MODE)
 OBJ_DIR = $(TARGET_DIR)/obj
-TARGET = $(TARGET_DIR)/hello_world
+TARGET = $(TARGET_DIR)/program
 
 # List all source files in the src directory
 SRC_FILES = $(wildcard $(SRC_DIR)/*.cpp)
